@@ -1,3 +1,4 @@
+
 #include <string.h>
 #include <stdio.h>
 #include <locale.h>
@@ -52,6 +53,9 @@ Cars* Cars:: In(ifstream &ifst)
 	char str[10];
 	ifst.getline(str, 10, '\n');
 	avto->power = atoi(str);
+  ifst.getline(str, 10, '\n');
+	avto->exp = atof(str);
+  
 	avto->InData(ifst);
 	return avto;
 
@@ -62,4 +66,8 @@ int Cars:: fr()        // â äîê
 	return power;
 }
 
+float Cars::fr2()        
+{
+	return exp;
+}
 

@@ -1,3 +1,4 @@
+
 #include "Car.h"
 #include "List.h"
 #include <fstream>
@@ -5,12 +6,11 @@
 using namespace std;
 
 
-void List:: Free()        //////// èíèöèàëèçàöèÿ 
+void List:: Free()        //////// ������������� 
 {
 	if (this == 0)
 		return;
 	List *p = this;
-	
 
 	p->next = NULL;
 	p->a = NULL;
@@ -52,13 +52,13 @@ void List::Out(ofstream &ofst)
 		p = p->next;
 	}
 	List *p1 = this;
-	ofst << "Êîíòåéíåð çàïîëíåí! " << endl;
-	ofst << "Êîëè÷åñòâî Àâòî: " << kol << endl;
+	ofst << "��������� ��������! " << endl;
+	ofst << "���������� ����: " << kol << endl;
 	while (p1 != NULL)
 	{
 		ofst << i << ": ";
-		ofst << "Êîë-âî ëîøàäèíûõ ñèë: " << p1->a->fr() << ' ';
-		ofst << "Îòíîøåíèå âåñà ê ìîùíîñòè: " << p1->a->Ratio() << ' ';
+		ofst <<"���-�� ���������� ���: " << p1->a->fr() << ' ';
+		ofst << "������: " << p1->a->fr2() << ' ';
 		p1->a->Out(ofst);
 		p1 = p1->next;
 		i++;
