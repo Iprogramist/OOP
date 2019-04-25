@@ -13,9 +13,14 @@ void Gruz:: InData( ifstream &ifst)
 
 void Gruz:: Out(ofstream &ofst)
 {
-	ofst << " Ãðóçîïîäúåìíîñòü ãðóçîâèêà: " << mas << endl;
+	ofst << " ÃƒÃ°Ã³Ã§Ã®Ã¯Ã®Ã¤ÃºÃ¥Ã¬Ã­Ã®Ã±Ã²Ã¼ Ã£Ã°Ã³Ã§Ã®Ã¢Ã¨ÃªÃ : " << mas << endl;
 }
 
+void Gruz:: OnlyGruz(ofstream &ofst)
+{
+	ofst<<"ÃŠÃ®Ã«-Ã¢Ã® Ã«Ã®Ã¸Ã Ã¤Ã¨Ã­Ã»Ãµ Ã±Ã¨Ã« : "<<fr()<< ' ';
+	Out(ofst);
+}
 float Gruz::Ratio()
 {
 	return float(mas) / float(fr());

@@ -59,6 +59,7 @@ void List::Out(ofstream &ofst)
 		ofst << i << ": ";
 		ofst <<"���-�� ���������� ���: " << p1->a->fr() << ' ';
 		ofst << "������: " << p1->a->fr2() << ' ';
+    p1->a->OnlyGruz(ofst);
 		p1->a->Out(ofst);
 		p1 = p1->next;
 		i++;
@@ -70,3 +71,4 @@ List::List()
 	next = NULL;
 	a = NULL;
 }
+

@@ -70,4 +70,8 @@ float Cars::fr2()
 {
 	return exp;
 }
+void Cars::OnlyGruz(ofstream &ofst) 
+{
+	ofst << " - " << endl;
+}
 

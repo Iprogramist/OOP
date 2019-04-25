@@ -15,6 +15,7 @@ public:
 	float fr2();
 	virtual void Out(ofstream &ofst) = 0;
 	virtual void InData(ifstream &ifst) = 0;
+	virtual void OnlyGruz(ofstream &ofst);
 	virtual float Ratio() = 0;
 };
 
