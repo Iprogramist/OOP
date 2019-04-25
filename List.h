@@ -13,6 +13,7 @@ public:
 	void Free();
 	void In(ifstream &ifst);
 	void Out(ofstream &ofst);
+	void Sort();
 	List();
 	~List()
 	{

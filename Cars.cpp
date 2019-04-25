@@ -71,3 +71,8 @@ float Cars::fr2()
 	return exp;
 }
 
+bool Cars:: Compare(Cars &a)
+{
+	return this->Ratio() < a.Ratio();
+}
+
