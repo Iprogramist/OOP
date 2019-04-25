@@ -1,4 +1,3 @@
-
 #include <string.h>
 #include <stdio.h>
 #include <locale.h>
@@ -35,7 +34,7 @@ Cars* Cars:: In(ifstream &ifst)
 		key = 3;
 	}
 
-	switch (key)  // Ã¢ Ã§Ã Ã¢Ã¨Ã±Ã¨Ã¬Ã®Ã±Ã²Ã¨, Ã®Ã² Ã²Ã®Ã£Ã®, Ã·Ã²Ã® Ã¢ ÃªÃ«Ã¾Ã·Ã¥, Ã²Ã³Ã¤Ã  Ã¨ Ã®Ã²Ã¯Ã°Ã Ã¨Ã² Ã­Ã®Ã¢Ã»Ã¥ Ã¤Ã Ã­Ã­Ã»Ã¥ 
+	switch (key)  // â çàâèñèìîñòè, îò òîãî, ÷òî â êëþ÷å, òóäà è îòïðàèò íîâûå äàííûå 
 	{
 	case 1:
 		avto = new Gruz;
@@ -46,32 +45,38 @@ Cars* Cars:: In(ifstream &ifst)
 	case 3:
 		avto = new Leg;
 		break;
-	default:    // Ã­Ã¥Ã² Ã±Ã®Ã¢Ã¯Ã Ã¤Ã¥Ã­Ã¨Ã© -> Ã­Ã¥Ã² Ã§Ã Ã¯Ã¨Ã±Ã¨
+	default:    // íåò ñîâïàäåíèé -> íåò çàïèñè
 		return 0;
 	}
-	
+
 	char str[10];
 	ifst.getline(str, 10, '\n');
 	avto->power = atoi(str);
-  ifst.getline(str, 10, '\n');
+
+	ifst.getline(str, 10, '\n');
 	avto->exp = atof(str);
-  
+
 	avto->InData(ifst);
 	return avto;
 
 }
 
-int Cars:: fr()        // Ã¢ Ã¤Ã®Ãª
+int Cars:: fr()        // â äîê
 {
 	return power;
 }
 
-float Cars::fr2()        
+float Cars::fr2()
 {
 	return exp;
 }
-void Cars::OnlyGruz(ofstream &ofst) 
+
+bool Cars::Compare(Cars &a)
+{
+	return this->Ratio() < a.Ratio();
+}
+
+void Cars::OnlyGruz(ofstream &ofst)
 {
 	ofst << " - " << endl;
 }
-

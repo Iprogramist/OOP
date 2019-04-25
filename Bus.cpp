@@ -14,7 +14,7 @@ void Bus:: Out( ofstream &ofst)
 	ofst << " Вместимость пассажиров: " << capacity << endl;
 }
 
-float Bus::Ratio() 
+float Bus::Ratio()
 {
-	return float(capacity*75) / float(fr());
-}
+	return float(capacity * 75) / float(fr());
+}

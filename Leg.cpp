@@ -13,3 +13,8 @@ void Leg::Out(ofstream &ofst)
 {
 	ofst << " Максимальная скорость а/м: " << speed << endl;
 }
+
+float Leg::Ratio()
+{
+	return float(75) / float(fr());
+}
