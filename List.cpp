@@ -1,3 +1,4 @@
+
 #include "Car.h"
 #include "List.h"
 #include <fstream>
@@ -5,7 +6,7 @@
 using namespace std;
 
 
-void List:: Free()        //////// инициализация 
+void List:: Free()        //////// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 {
 	if (this == 0)
 		return;
@@ -51,13 +52,13 @@ void List::Out(ofstream &ofst)
 		p = p->next;
 	}
 	List *p1 = this;
-	ofst << "Контейнер заполнен! " << endl;
-	ofst << "Количество Авто: " << kol << endl;
+	ofst << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! " << endl;
+	ofst << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: " << kol << endl;
 	while (p1 != NULL)
 	{
 		ofst << i << ": ";
-		ofst <<"Кол-во лошадинных сил: " << p1->a->fr() << ' ';
-		ofst << "Расход: " << p1->a->fr2() << ' ';
+		ofst <<"пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ: " << p1->a->fr() << ' ';
+		ofst << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << p1->a->fr2() << ' ';
 		p1->a->Out(ofst);
 		p1 = p1->next;
 		i++;

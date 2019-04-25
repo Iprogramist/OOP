@@ -1,20 +1,17 @@
 #pragma once
 #include "Car.h"
 #include <fstream>
-
 using namespace std;
+#ifndef _Leg_
+#define _Leg_
 
-#ifndef _Gruz_
-#define _Gruz_
-
-class Gruz : public Cars
+class Leg : public Cars
 {
-	int mas;
+	int speed;
 public:
 	void Out(ofstream &ofst);
 	void InData(ifstream &ifst);
-	float Ratio();
-	Gruz() {};
+	Leg() {};
 };
 
 #endif
