@@ -5,12 +5,12 @@
 using namespace std;
 
 
-void List:: Free()        //////// èíèöèàëèçàöèÿ 
+void List:: Free()        //////// Ã¨Ã­Ã¨Ã¶Ã¨Ã Ã«Ã¨Ã§Ã Ã¶Ã¨Ã¿ 
 {
 	if (this == 0)
 		return;
 	List *p = this;
-	List *t;
+	
 
 	p->next = NULL;
 	p->a = NULL;
@@ -52,13 +52,13 @@ void List::Out(ofstream &ofst)
 		p = p->next;
 	}
 	List *p1 = this;
-	ofst << "Êîíòåéíåð çàïîëíåí! " << endl;
-	ofst << "Êîëè÷åñòâî Àâòî: " << kol << endl;
+	ofst << "ÃŠÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã° Ã§Ã Ã¯Ã®Ã«Ã­Ã¥Ã­! " << endl;
+	ofst << "ÃŠÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã€Ã¢Ã²Ã®: " << kol << endl;
 	while (p1 != NULL)
 	{
 		ofst << i << ": ";
-		ofst << "Êîë-âî ëîøàäèíûõ ñèë: " << p1->a->fr() << ' ';
-		ofst << "Îòíîøåíèå âåñà ê ìîùíîñòè: " << p1->a->Ratio() << ' ';
+		ofst << "ÃŠÃ®Ã«-Ã¢Ã® Ã«Ã®Ã¸Ã Ã¤Ã¨Ã­Ã»Ãµ Ã±Ã¨Ã«: " << p1->a->fr() << ' ';
+		ofst << "ÃŽÃ²Ã­Ã®Ã¸Ã¥Ã­Ã¨Ã¥ Ã¢Ã¥Ã±Ã  Ãª Ã¬Ã®Ã¹Ã­Ã®Ã±Ã²Ã¨: " << p1->a->Ratio() << ' ';
 		p1->a->Out(ofst);
 		p1 = p1->next;
 		i++;

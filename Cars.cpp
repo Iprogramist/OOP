@@ -4,6 +4,7 @@
 #include "Car.h"
 #include "Bus.h"
 #include "Gruz.h"
+#include "Leg.h"
 #include <fstream>
 
 
@@ -16,8 +17,8 @@ Cars* Cars:: In(ifstream &ifst)
 	int key;
 	char od[] = "gruzovik";
 	char dv[] = "avtobus";
+	char lg[] = "legkovaya";
 	char prov[10];
-
 	ifst.getline(prov, 10, '\n');
 	
 	if (_stricmp(od, prov) == 0)
@@ -28,8 +29,12 @@ Cars* Cars:: In(ifstream &ifst)
 	{
 		key = 2;
 	}
+	if (_stricmp(lg, prov) == 0)
+	{
+		key = 3;
+	}
 
-	switch (key)  // в зависимости, от того, что в ключе, туда и отпраит новые данные 
+	switch (key)  // Гў Г§Г ГўГЁГ±ГЁГ¬Г®Г±ГІГЁ, Г®ГІ ГІГ®ГЈГ®, Г·ГІГ® Гў ГЄГ«ГѕГ·ГҐ, ГІГіГ¤Г  ГЁ Г®ГІГЇГ°Г ГЁГІ Г­Г®ГўГ»ГҐ Г¤Г Г­Г­Г»ГҐ 
 	{
 	case 1:
 		avto = new Gruz;
@@ -37,7 +42,10 @@ Cars* Cars:: In(ifstream &ifst)
 	case 2:
 		avto = new Bus;
 		break;
-	default:    // нет совпадений -> нет записи
+	case 3:
+		avto = new Leg;
+		break;
+	default:    // Г­ГҐГІ Г±Г®ГўГЇГ Г¤ГҐГ­ГЁГ© -> Г­ГҐГІ Г§Г ГЇГЁГ±ГЁ
 		return 0;
 	}
 	
@@ -49,7 +57,7 @@ Cars* Cars:: In(ifstream &ifst)
 
 }
 
-int Cars:: fr()        // в док
+int Cars:: fr()        // Гў Г¤Г®ГЄ
 {
 	return power;
 }
