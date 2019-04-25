@@ -42,12 +42,21 @@ Cars* Cars:: In(ifstream &ifst)
 	char str[10];
 	ifst.getline(str, 10, '\n');
 	avto->power = atoi(str);
+
+	ifst.getline(str, 10, '\n');
+	avto->exp = atof(str);
+
 	avto->InData(ifst);
 	return avto;
 
 }
 
-int Cars:: fr()        // в док
+int Cars:: fr()        
 {
 	return power;
+}
+
+float Cars::fr2()        
+{
+	return exp;
 }

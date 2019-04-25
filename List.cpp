@@ -10,7 +10,6 @@ void List:: Free()        //////// инициализация
 	if (this == 0)
 		return;
 	List *p = this;
-	List *t;
 
 	p->next = NULL;
 	p->a = NULL;
@@ -58,6 +57,7 @@ void List::Out(ofstream &ofst)
 	{
 		ofst << i << ": ";
 		ofst <<"Кол-во лошадинных сил: " << p1->a->fr() << ' ';
+		ofst << "Расход: " << p1->a->fr2() << ' ';
 		p1->a->Out(ofst);
 		p1 = p1->next;
 		i++;
