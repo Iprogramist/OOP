@@ -1,9 +1,11 @@
+
 #include <string.h>
 #include <stdio.h>
 #include <locale.h>
 #include "Car.h"
 #include "Bus.h"
 #include "Gruz.h"
+#include "Leg.h"
 #include <fstream>
 
 
@@ -16,8 +18,8 @@ Cars* Cars:: In(ifstream &ifst)
 	int key;
 	char od[] = "gruzovik";
 	char dv[] = "avtobus";
+	char lg[] = "legkovaya";
 	char prov[10];
-
 	ifst.getline(prov, 10, '\n');
 	
 	if (_stricmp(od, prov) == 0)
@@ -28,8 +30,12 @@ Cars* Cars:: In(ifstream &ifst)
 	{
 		key = 2;
 	}
+	if (_stricmp(lg, prov) == 0)
+	{
+		key = 3;
+	}
 
-	switch (key)  // â çàâèñèìîñòè, îò òîãî, ÷òî â êëþ÷å, òóäà è îòïðàèò íîâûå äàííûå 
+	switch (key)  // Ã¢ Ã§Ã Ã¢Ã¨Ã±Ã¨Ã¬Ã®Ã±Ã²Ã¨, Ã®Ã² Ã²Ã®Ã£Ã®, Ã·Ã²Ã® Ã¢ ÃªÃ«Ã¾Ã·Ã¥, Ã²Ã³Ã¤Ã  Ã¨ Ã®Ã²Ã¯Ã°Ã Ã¨Ã² Ã­Ã®Ã¢Ã»Ã¥ Ã¤Ã Ã­Ã­Ã»Ã¥ 
 	{
 	case 1:
 		avto = new Gruz;
@@ -37,25 +43,36 @@ Cars* Cars:: In(ifstream &ifst)
 	case 2:
 		avto = new Bus;
 		break;
-	default:    // íåò ñîâïàäåíèé -> íåò çàïèñè
+	case 3:
+		avto = new Leg;
+		break;
+	default:    // Ã­Ã¥Ã² Ã±Ã®Ã¢Ã¯Ã Ã¤Ã¥Ã­Ã¨Ã© -> Ã­Ã¥Ã² Ã§Ã Ã¯Ã¨Ã±Ã¨
 		return 0;
 	}
 	
 	char str[10];
 	ifst.getline(str, 10, '\n');
 	avto->power = atoi(str);
+  ifst.getline(str, 10, '\n');
+	avto->exp = atof(str);
+  
 	avto->InData(ifst);
 	return avto;
 
 }
 
-int Cars:: fr()        // â äîê
+int Cars:: fr()        // Ã¢ Ã¤Ã®Ãª
 {
 	return power;
 }
 
+float Cars::fr2()        
+{
+	return exp;
+}
 
 bool Cars:: Compare(Cars &a)
 {
 	return this->Ratio() < a.Ratio();
 }
+
