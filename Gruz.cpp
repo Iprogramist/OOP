@@ -15,3 +15,9 @@ void Gruz:: Out(ofstream &ofst)
 {
 	ofst << " Грузоподъемность грузовика: " << mas << endl;
 }
+
+void Gruz:: OnlyGruz(ofstream &ofst)
+{
+	ofst<<"Кол-во лошадиных сил : "<<fr()<< ' ';
+	Out(ofst);
+}

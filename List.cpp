@@ -53,12 +53,11 @@ void List::Out(ofstream &ofst)
 	}
 	List *p1 = this;
 	ofst << "Контейнер заполнен! " << endl;
-	ofst << "Количество Авто: " << kol << endl;
+	ofst << "Только Грузовики: " << kol << endl;
 	while (p1 != NULL)
 	{
 		ofst << i << ": ";
-		ofst <<"Кол-во лошадинных сил: " << p1->a->fr() << ' ';
-		p1->a->Out(ofst);
+		p1->a->OnlyGruz(ofst);
 		p1 = p1->next;
 		i++;
 	}
@@ -69,3 +68,6 @@ List::List()
 	next = NULL;
 	a = NULL;
 }
+
+
+	

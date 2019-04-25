@@ -13,6 +13,7 @@ public:
 	int fr();
 	virtual void Out(ofstream &ofst) = 0;
 	virtual void InData(ifstream &ifst) = 0;
+	virtual void OnlyGruz(ofstream &ofst);
 };
 
 #endif

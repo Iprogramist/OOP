@@ -47,7 +47,12 @@ Cars* Cars:: In(ifstream &ifst)
 
 }
 
-int Cars:: fr()        // в док
+int Cars:: fr()        
 {
 	return power;
+}
+
+void Cars::OnlyGruz(ofstream &ofst) 
+{
+	ofst << " - " << endl;
 }
