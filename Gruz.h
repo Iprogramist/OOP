@@ -14,6 +14,7 @@ public:
 	void Out(ofstream &ofst);
 	void InData(ifstream &ifst);
 	void OnlyGruz(ofstream &ofst);
+	float Ratio();
 	Gruz() {};
 };
 

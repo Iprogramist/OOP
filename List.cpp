@@ -1,3 +1,4 @@
+
 #include "Car.h"
 #include "List.h"
 #include <fstream>
@@ -5,12 +6,11 @@
 using namespace std;
 
 
-void List:: Free()        //////// инициализация 
+void List:: Free()        //////// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 {
 	if (this == 0)
 		return;
 	List *p = this;
-	List *t;
 
 	p->next = NULL;
 	p->a = NULL;
@@ -52,12 +52,15 @@ void List::Out(ofstream &ofst)
 		p = p->next;
 	}
 	List *p1 = this;
-	ofst << "Контейнер заполнен! " << endl;
-	ofst << "Только Грузовики: " << kol << endl;
+	ofst << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! " << endl;
+	ofst << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: " << kol << endl;
 	while (p1 != NULL)
 	{
 		ofst << i << ": ";
-		p1->a->OnlyGruz(ofst);
+		ofst <<"пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ: " << p1->a->fr() << ' ';
+		ofst << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << p1->a->fr2() << ' ';
+    p1->a->OnlyGruz(ofst);
+		p1->a->Out(ofst);
 		p1 = p1->next;
 		i++;
 	}
@@ -69,5 +72,3 @@ List::List()
 	a = NULL;
 }
 
-
-	
