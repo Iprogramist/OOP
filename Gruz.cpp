@@ -15,3 +15,8 @@ void Gruz:: Out(ofstream &ofst)
 {
 	ofst << " Грузоподъемность грузовика: " << mas << endl;
 }
+
+float Gruz::Ratio()
+{
+	return float(mas) / float(fr());
+}

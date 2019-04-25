@@ -34,7 +34,7 @@ Cars* Cars:: In(ifstream &ifst)
 		key = 3;
 	}
 
-	switch (key)  // в зависимости, от того, что в ключе, туда и отпраит новые данные 
+	switch (key)  // Гў Г§Г ГўГЁГ±ГЁГ¬Г®Г±ГІГЁ, Г®ГІ ГІГ®ГЈГ®, Г·ГІГ® Гў ГЄГ«ГѕГ·ГҐ, ГІГіГ¤Г  ГЁ Г®ГІГЇГ°Г ГЁГІ Г­Г®ГўГ»ГҐ Г¤Г Г­Г­Г»ГҐ 
 	{
 	case 1:
 		avto = new Gruz;
@@ -45,10 +45,10 @@ Cars* Cars:: In(ifstream &ifst)
 	case 3:
 		avto = new Leg;
 		break;
-	default:    // нет совпадений -> нет записи
+	default:    // Г­ГҐГІ Г±Г®ГўГЇГ Г¤ГҐГ­ГЁГ© -> Г­ГҐГІ Г§Г ГЇГЁГ±ГЁ
 		return 0;
 	}
-
+	
 	char str[10];
 	ifst.getline(str, 10, '\n');
 	avto->power = atoi(str);
@@ -57,7 +57,9 @@ Cars* Cars:: In(ifstream &ifst)
 
 }
 
-int Cars:: fr()        // в док
+int Cars:: fr()        // Гў Г¤Г®ГЄ
 {
 	return power;
 }
+
+
