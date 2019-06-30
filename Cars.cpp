@@ -1,4 +1,3 @@
-
 #include <string.h>
 #include <stdio.h>
 #include <locale.h>
@@ -7,26 +6,29 @@
 #include "Gruz.h"
 #include "Leg.h"
 #include <fstream>
-
+#include <iostream>
 
 using namespace std;
 
-
 Cars* Cars:: In(ifstream &ifst)
 {
-	Cars *avto;
+	Cars *ca;
 	int key;
-	char od[] = "gruzovik";
-	char dv[] = "avtobus";
+	char gr[] = "gruzovik";
+	char av[] = "avtobus";
 	char lg[] = "legkovaya";
 	char prov[10];
 	ifst.getline(prov, 10, '\n');
+	if (_stricmp(gr, prov) != 0 and _stricmp(av, prov) != 0 and _stricmp(lg, prov) != 0)
+	{
+		cout << "Неверный формат автомобиля! \n";
+	}
 	
-	if (_stricmp(od, prov) == 0)
+	if (_stricmp(gr, prov) == 0)
 	{
 		key = 1;
 	}
-	if (_stricmp(dv, prov) == 0)
+	if (_stricmp(av, prov) == 0)
 	{
 		key = 2;
 	}
@@ -35,43 +37,64 @@ Cars* Cars:: In(ifstream &ifst)
 		key = 3;
 	}
 
-	switch (key)  // Гў Г§Г ГўГЁГ±ГЁГ¬Г®Г±ГІГЁ, Г®ГІ ГІГ®ГЈГ®, Г·ГІГ® Гў ГЄГ«ГѕГ·ГҐ, ГІГіГ¤Г  ГЁ Г®ГІГЇГ°Г ГЁГІ Г­Г®ГўГ»ГҐ Г¤Г Г­Г­Г»ГҐ 
+	switch (key)  // в зависимости, от того, что в ключе, туда и отпраит новые данные 
 	{
 	case 1:
-		avto = new Gruz;
+		ca = new Gruz;
 		break;
 	case 2:
-		avto = new Bus;
+		ca = new Bus;
 		break;
 	case 3:
-		avto = new Leg;
+		ca = new Leg;
 		break;
-	default:    // Г­ГҐГІ Г±Г®ГўГЇГ Г¤ГҐГ­ГЁГ© -> Г­ГҐГІ Г§Г ГЇГЁГ±ГЁ
+	default:    // нет совпадений -> нет записи
 		return 0;
 	}
-	
-	char str[10];
-	ifst.getline(str, 10, '\n');
-	avto->power = atoi(str);
-  ifst.getline(str, 10, '\n');
-	avto->exp = atof(str);
-  
-	avto->InData(ifst);
-	return avto;
 
+	char tmp[10];
+	ifst.getline(tmp, 10, '\n');
+	ca->power = atoi(tmp);
+	if (ifst.fail())
+	{
+		cout << "Неверный формат!" << endl;
+	}
+	else if (ca->power <= 0)
+	{
+		cout << "Мощность должна быть больше нуля!" << endl;
+	}
+
+	ifst.getline(tmp, 10, '\n');
+	ca->exp = atof(tmp);
+	if (ifst.fail())
+	{
+		cout << "Неверный формат!" << endl;
+	}
+	else if (ca->exp <= 0)
+	{
+		cout << "Расход должнен быть больше нуля!" << endl;
+	}
+
+	ca->InData(ifst);
+	return ca;
 }
 
-int Cars:: fr()        // Гў Г¤Г®ГЄ
+int Cars:: getPower()        // в док
 {
 	return power;
 }
 
-float Cars::fr2()        
+float Cars::getExp()
 {
 	return exp;
 }
-void Cars::OnlyGruz(ofstream &ofst) 
+
+bool Cars::Compare(Cars &a)
+{
+	return this->Ratio() < a.Ratio();
+}
+
+void Cars::OnlyGruz(ofstream &ofst)
 {
 	ofst << " - " << endl;
 }
-

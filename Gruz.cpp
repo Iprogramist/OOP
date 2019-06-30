@@ -1,5 +1,6 @@
 #include "Gruz.h"
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -8,20 +9,29 @@ void Gruz:: InData( ifstream &ifst)
 	char str[10];
 	ifst.getline(str, 10, '\n');
 	mas = atoi(str);
+	if (ifst.fail())
+	{
+		cout << "Неверный формат!" << endl;
+	}
+	else if (mas <= 0)
+	{
+		cout << "Масса должна быть больше нуля!" << endl;
+	}
 }
 
 
 void Gruz:: Out(ofstream &ofst)
 {
-	ofst << " ГѓГ°ГіГ§Г®ГЇГ®Г¤ГєГҐГ¬Г­Г®Г±ГІГј ГЈГ°ГіГ§Г®ГўГЁГЄГ : " << mas << endl;
+	ofst << " Грузоподъемность грузовика: " << mas << endl;
 }
 
-void Gruz:: OnlyGruz(ofstream &ofst)
-{
-	ofst<<"ГЉГ®Г«-ГўГ® Г«Г®ГёГ Г¤ГЁГ­Г»Гµ Г±ГЁГ« : "<<fr()<< ' ';
-	Out(ofst);
-}
 float Gruz::Ratio()
 {
-	return float(mas) / float(fr());
+	return float(mas) / float(getPower());
+}
+
+void Gruz::OnlyGruz(ofstream &ofst)
+{
+	ofst << "Кол-во лошадиных сил : " << getPower() << ' ';
+	Out(ofst);
 }

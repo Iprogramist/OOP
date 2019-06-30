@@ -13,8 +13,8 @@ class Gruz : public Cars
 public:
 	void Out(ofstream &ofst);
 	void InData(ifstream &ifst);
-	void OnlyGruz(ofstream &ofst);
 	float Ratio();
+	void OnlyGruz(ofstream &ofst);
 	Gruz() {};
 };
 

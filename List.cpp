@@ -1,67 +1,81 @@
-
 #include "Car.h"
 #include "List.h"
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
 
-void List:: Free()        //////// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+void List:: Free()        //////// инициализация 
 {
 	if (this == 0)
+	{
 		return;
-	List *p = this;
+	}
 
-	p->next = NULL;
-	p->a = NULL;
-	p = NULL;
+	List *list = this;
+	
+	list->next = NULL;
+	list->car = NULL;
+	list = NULL;
 }
 
 void List::In(ifstream &ifst)
 {
-	int kol = 0;
+	int count = 0;
 	List *end = this;
 
 	while (!ifst.eof())
 	{
-		if (kol == 0)
+		if (count == 0)
 		{
-			this->a = Cars::In(ifst);
+			this->car = Cars::In(ifst);
 			this->next = NULL;
-			kol++;
+			count++;
 		}
 		else
 		{
 			end->next = new List;
 			end = end->next;
-			end->a = Cars::In(ifst);
+			end->car = Cars::In(ifst);
 			end->next = NULL;
-			kol++;
+			count++;
 		}
 	}
 }
 
 void List::Out(ofstream &ofst)
 {
-	List *p = this;
+	List *list = this;
 	int i = 1;
-	int  kol = 0;
-	while (p != NULL)
+	int  count = 0;
+	while (list != NULL)
 	{
-		kol++;
-		p = p->next;
+		count++;
+		list = list->next;
 	}
-	List *p1 = this;
-	ofst << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! " << endl;
-	ofst << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: " << kol << endl;
-	while (p1 != NULL)
+	List *list1 = this;
+	ofst << "Контейнер заполнен! " << endl;
+	ofst << "Количество Авто: " << count << endl;
+	while (list1 != NULL)
 	{
 		ofst << i << ": ";
-		ofst <<"пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ: " << p1->a->fr() << ' ';
-		ofst << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << p1->a->fr2() << ' ';
-    p1->a->OnlyGruz(ofst);
-		p1->a->Out(ofst);
-		p1 = p1->next;
+		ofst <<"Кол-во лошадиных сил: " << list1->car->getPower() << ' ';
+		ofst << "Отношение веса к мощности: " << list1->car->Ratio() << ' ';
+		ofst << "Расход: " << list1->car->getExp() << ' ';
+		list1->car->Out(ofst);
+		list1 = list1->next;
+		i++;
+	}
+
+	list1 = this;
+	i = 1;
+	ofst << "Только Грузовики: " << count << endl;
+	while (list1 != NULL)
+	{
+		ofst << i << ": ";
+		list1->car->OnlyGruz(ofst);
+		list1 = list1->next;
 		i++;
 	}
 }
@@ -69,6 +83,52 @@ void List::Out(ofstream &ofst)
 List::List()
 {
 	next = NULL;
-	a = NULL;
+	car = NULL;
 }
 
+void List::Sort()
+{
+	char signOfCompare;
+	bool check;
+	cout << "\nКак отсортировать? По возрастанию (>) или убыванию (<): ";
+	cin >> signOfCompare;
+	while (signOfCompare != '<' and signOfCompare != '>')
+	{
+		cout << "\nОшибка! Введите < или > : ";
+		cin >> signOfCompare;
+	}
+	switch (signOfCompare)
+	{
+		case '>':
+		{
+			check = 0;
+			break;
+		}
+		case '<':
+		{
+			check = 1;
+			break;
+		}
+		default:
+		{
+			cout << "Ошибка!" << endl;
+		}
+	}
+
+	Cars* tmpCar;
+	List* temp1;
+	List * temp2;
+
+	for (temp1 = (this); temp1; temp1 = temp1->next)
+	{
+		for (temp2 = (this); temp2; temp2 = temp2->next)
+		{
+			if ((temp1->car->Compare(*temp2->car)) - check)
+			{
+				tmpCar = temp1->car;
+				temp1->car = temp2->car;
+				temp2->car = tmpCar;
+			}
+		}
+	}
+}

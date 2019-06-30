@@ -1,12 +1,22 @@
 #include "Bus.h"
 #include <fstream>
+#include <iostream>
+
 using namespace std;
 
 void Bus::InData(ifstream &ifst)
 {
-	char str[10];
-	ifst.getline(str,10, '\n');
-	capacity = atoi(str);
+	char tmp[10];
+	ifst.getline(tmp,10, '\n');
+	capacity = atoi(tmp);
+	if (ifst.fail())
+	{
+		cout << "Неверный формат!" << endl;
+	}
+	else if (capacity <= 0)
+	{
+		cout << "Вместимость должна быть больше нуля!" << endl;
+	}
 }
 
 void Bus:: Out( ofstream &ofst)
@@ -14,7 +24,7 @@ void Bus:: Out( ofstream &ofst)
 	ofst << " Вместимость пассажиров: " << capacity << endl;
 }
 
-float Bus::Ratio() 
+float Bus::Ratio()
 {
-	return float(capacity*75) / float(fr());
-}
+	return float(capacity * 75) / float(getPower());
+}

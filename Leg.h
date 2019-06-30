@@ -11,6 +11,7 @@ class Leg : public Cars
 public:
 	void Out(ofstream &ofst);
 	void InData(ifstream &ifst);
+	float Ratio();
 	Leg() {};
 };
 
