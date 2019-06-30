@@ -1,22 +1,12 @@
 #include "Bus.h"
 #include <fstream>
-#include <iostream>
-
 using namespace std;
 
 void Bus::InData(ifstream &ifst)
 {
-	char tmp[10];
-	ifst.getline(tmp,10, '\n');
-	capacity = atoi(tmp);
-	if (ifst.fail())
-	{
-		cout << "Неверный формат!" << endl;
-	}
-	else if (capacity <= 0)
-	{
-		cout << "Вместимость должна быть больше нуля!" << endl;
-	}
+	char str[10];
+	ifst.getline(str,10, '\n');
+	capacity = atoi(str);
 }
 
 void Bus:: Out( ofstream &ofst)
@@ -24,7 +14,17 @@ void Bus:: Out( ofstream &ofst)
 	ofst << " Вместимость пассажиров: " << capacity << endl;
 }
 
-float Bus::Ratio()
+void Bus::MultiMethod(Cars *other, ofstream &ofst)
 {
-	return float(capacity * 75) / float(getPower());
+	other->MMBus(ofst);
+}
+
+void Bus::MMBus(ofstream &ofst)
+{
+	ofst << "Автобус и автобус:" << endl;
+}
+
+void Bus::MMGruz(ofstream &ofst)
+{
+	ofst << "Автобус и грузовик:" << endl;
 }

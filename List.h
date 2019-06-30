@@ -6,14 +6,14 @@
 
 class List
 {
-	Cars *car;
+	Cars *a;
 	List *next;
 
 public:
 	void Free();
 	void In(ifstream &ifst);
 	void Out(ofstream &ofst);
-	void Sort();
+	void MultiMethod(ofstream &ofst);
 	List();
 	~List()
 	{

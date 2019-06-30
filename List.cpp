@@ -1,7 +1,6 @@
 #include "Car.h"
 #include "List.h"
 #include <fstream>
-#include <iostream>
 
 using namespace std;
 
@@ -9,73 +8,58 @@ using namespace std;
 void List:: Free()        //////// инициализация 
 {
 	if (this == 0)
-	{
 		return;
-	}
+	List *p = this;
+	List *t;
 
-	List *list = this;
-	
-	list->next = NULL;
-	list->car = NULL;
-	list = NULL;
+	p->next = NULL;
+	p->a = NULL;
+	p = NULL;
 }
 
 void List::In(ifstream &ifst)
 {
-	int count = 0;
+	int kol = 0;
 	List *end = this;
 
 	while (!ifst.eof())
 	{
-		if (count == 0)
+		if (kol == 0)
 		{
-			this->car = Cars::In(ifst);
+			this->a = Cars::In(ifst);
 			this->next = NULL;
-			count++;
+			kol++;
 		}
 		else
 		{
 			end->next = new List;
 			end = end->next;
-			end->car = Cars::In(ifst);
+			end->a = Cars::In(ifst);
 			end->next = NULL;
-			count++;
+			kol++;
 		}
 	}
 }
 
 void List::Out(ofstream &ofst)
 {
-	List *list = this;
+	List *p = this;
 	int i = 1;
-	int  count = 0;
-	while (list != NULL)
+	int  kol = 0;
+	while (p != NULL)
 	{
-		count++;
-		list = list->next;
+		kol++;
+		p = p->next;
 	}
-	List *list1 = this;
+	List *p1 = this;
 	ofst << "Контейнер заполнен! " << endl;
-	ofst << "Количество Авто: " << count << endl;
-	while (list1 != NULL)
+	ofst << "Количество Авто: " << kol << endl;
+	while (p1 != NULL)
 	{
 		ofst << i << ": ";
-		ofst <<"Кол-во лошадиных сил: " << list1->car->getPower() << ' ';
-		ofst << "Отношение веса к мощности: " << list1->car->Ratio() << ' ';
-		ofst << "Расход: " << list1->car->getExp() << ' ';
-		list1->car->Out(ofst);
-		list1 = list1->next;
-		i++;
-	}
-
-	list1 = this;
-	i = 1;
-	ofst << "Только Грузовики: " << count << endl;
-	while (list1 != NULL)
-	{
-		ofst << i << ": ";
-		list1->car->OnlyGruz(ofst);
-		list1 = list1->next;
+		ofst <<"Кол-во лошадинных сил: " << p1->a->fr() << ' ';
+		p1->a->Out(ofst);
+		p1 = p1->next;
 		i++;
 	}
 }
@@ -83,52 +67,18 @@ void List::Out(ofstream &ofst)
 List::List()
 {
 	next = NULL;
-	car = NULL;
+	a = NULL;
 }
 
-void List::Sort()
+void List::MultiMethod(ofstream &ofst)
 {
-	char signOfCompare;
-	bool check;
-	cout << "\nКак отсортировать? По возрастанию (>) или убыванию (<): ";
-	cin >> signOfCompare;
-	while (signOfCompare != '<' and signOfCompare != '>')
+	List *b = this;
+	ofst << "Мультиметод." << endl;
+	while (b->next != NULL)
 	{
-		cout << "\nОшибка! Введите < или > : ";
-		cin >> signOfCompare;
-	}
-	switch (signOfCompare)
-	{
-		case '>':
-		{
-			check = 0;
-			break;
-		}
-		case '<':
-		{
-			check = 1;
-			break;
-		}
-		default:
-		{
-			cout << "Ошибка!" << endl;
-		}
-	}
-
-	Cars* tmpCar;
-	List* temp1;
-	List * temp2;
-
-	for (temp1 = (this); temp1; temp1 = temp1->next)
-	{
-		for (temp2 = (this); temp2; temp2 = temp2->next)
-		{
-			if ((temp1->car->Compare(*temp2->car)) - check)
-			{
-				tmpCar = temp1->car;
-				temp1->car = temp2->car;
-				temp2->car = tmpCar;
-			}
-		}
+		b->a->MultiMethod(b->next->a, ofst);
+		b->a->Out(ofst);
+		b->next->a->Out(ofst);
+		b = b->next;
 	}
 }

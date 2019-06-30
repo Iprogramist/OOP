@@ -4,97 +4,50 @@
 #include "Car.h"
 #include "Bus.h"
 #include "Gruz.h"
-#include "Leg.h"
 #include <fstream>
-#include <iostream>
+
 
 using namespace std;
 
+
 Cars* Cars:: In(ifstream &ifst)
 {
-	Cars *ca;
-	int key;
-	char gr[] = "gruzovik";
-	char av[] = "avtobus";
-	char lg[] = "legkovaya";
-	char prov[10];
-	ifst.getline(prov, 10, '\n');
-	if (_stricmp(gr, prov) != 0 and _stricmp(av, prov) != 0 and _stricmp(lg, prov) != 0)
-	{
-		cout << "Неверный формат автомобиля! \n";
-	}
-	
-	if (_stricmp(gr, prov) == 0)
+	Cars *avto;
+	char od[] = "gruzovik";
+	char dv[] = "avtobus";
+	char tmp[10];
+	ifst.getline(tmp, 10, '\n');
+	int key = 3;
+	if (_stricmp(od, tmp) == 0)
 	{
 		key = 1;
 	}
-	if (_stricmp(av, prov) == 0)
+	if (_stricmp(dv, tmp) == 0)
 	{
 		key = 2;
 	}
-	if (_stricmp(lg, prov) == 0)
-	{
-		key = 3;
-	}
 
-	switch (key)  // в зависимости, от того, что в ключе, туда и отпраит новые данные 
+	switch (key)  
 	{
 	case 1:
-		ca = new Gruz;
+		avto = new Gruz;
 		break;
 	case 2:
-		ca = new Bus;
-		break;
-	case 3:
-		ca = new Leg;
+		avto = new Bus;
 		break;
 	default:    // нет совпадений -> нет записи
 		return 0;
 	}
 
-	char tmp[10];
-	ifst.getline(tmp, 10, '\n');
-	ca->power = atoi(tmp);
-	if (ifst.fail())
-	{
-		cout << "Неверный формат!" << endl;
-	}
-	else if (ca->power <= 0)
-	{
-		cout << "Мощность должна быть больше нуля!" << endl;
-	}
+	char str[10];
+	ifst.getline(str, 10, '\n');
+	avto->power = atoi(str);
+	avto->InData(ifst);
+	return avto;
 
-	ifst.getline(tmp, 10, '\n');
-	ca->exp = atof(tmp);
-	if (ifst.fail())
-	{
-		cout << "Неверный формат!" << endl;
-	}
-	else if (ca->exp <= 0)
-	{
-		cout << "Расход должнен быть больше нуля!" << endl;
-	}
-
-	ca->InData(ifst);
-	return ca;
 }
 
-int Cars:: getPower()        // в док
+int Cars:: fr()        // в док
 {
 	return power;
-}
-
-float Cars::getExp()
-{
-	return exp;
-}
-
-bool Cars::Compare(Cars &a)
-{
-	return this->Ratio() < a.Ratio();
-}
-
-void Cars::OnlyGruz(ofstream &ofst)
-{
-	ofst << " - " << endl;
 }
